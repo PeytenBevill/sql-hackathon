@@ -6,6 +6,8 @@ router.get('/', actorsController.getAllActors);
 
 router.get('/:id', actorsController.getActorById);
 
-router.get('/:actor', actorsController.getActorByName);
+router.get('/actor/:actor', actorsController.getActorByName);
+
+router.get('/combine/:id', actorsController.actorMovies);
 
 module.exports = router
