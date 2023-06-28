@@ -19,20 +19,31 @@ const getActorById = (req, res) => {
     });
   }
   
-const getActorByName = (req, res) => {
-    // const { first_name, last_name } = body;
-    // const {body} = req;
+
+  const getActorByName = (req, res) => {
+      const { first_name, last_name } = body;
+      const {body} = req;
+  
+      console.log(req.params)
     
-    console.log('test');
-    // pool.query(`SELECT * FROM ?? (??, ??) VALUES (?,?)`, ["actors","first_name", "last_name", first_name, last_name],
-    // (err, row, fields) => {
-    //     // console.log(row);
-    //     res.json(row);
-    // });
-  }  
+      pool.query(`SELECT * FROM ?? (??, ??) VALUES (?,?)`, ["actors","first_name", "last_name", first_name, last_name],
+      (err, row, fields) => {
+          // console.log(row);
+          res.json(row);
+      });
+    }  
+
+    const actorMovies = (req, res) => {
+      const {id} = req.params
+      pool.query(`SELECT a.actor_name, m.title FROM actors a JOIN movies m ON a.movie_id = m.id WHERE a.actor_id = ?`), [id], (err, row, fields) => {
+      res.json(row)
+      };
+    }
+
   
   module.exports = {
     getAllActors,
     getActorById,
     getActorByName,
+    actorMovies,
   }
