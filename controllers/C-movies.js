@@ -19,11 +19,10 @@ const show = (req, res) => {
 
 //get one by title
 const showTitle = (req, res) => {
-  const { title } = req.params
-  console.log(title)
-  pool.query('SELECT * FROM movies WHERE title = ?', [title], (err, results) => {
+  const {title} = req.params
+  pool.query('SELECT * FROM movies WHERE title = ?', [title], (err, row, fields) => {
     
-    res.json(results)
+    res.json(row)
   })
 }
 
